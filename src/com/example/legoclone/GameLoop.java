@@ -48,17 +48,12 @@ public class GameLoop extends View implements Runnable {
 		thread.start();
 	}
 	
-	@Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		super.onSizeChanged(w, h, oldw, oldh);
-	}
-	
 	private void update() {
-		if (cx == 1) {
+		if (TriggerEvents.ifBetweenValuesFLOAT(cx, 0, 100)) {
 			
 		}
 		
-		if (cy == 1) {
+		if (TriggerEvents.ifBetweenValuesFLOAT(cy, 0, 100)) {
 			
 		}
 	}
