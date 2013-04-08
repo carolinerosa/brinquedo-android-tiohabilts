@@ -9,8 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Picture;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,10 +21,15 @@ public class GameLoop extends View implements Runnable {
 	private float cx;	// Center of touch's X axis.
 	private float cy;	// Center of touch's Y axis.
 	
-	private Paint paint = new Paint();
 	private Bitmap pic;
 	
 	private Random random = new Random();
+	
+	private int left;
+	private int top;
+	private int right;
+	private int bottom;
+	private int size = 50;
 	
 	public GameLoop (Context context) {
 		super(context);
@@ -36,7 +40,6 @@ public class GameLoop extends View implements Runnable {
 		setLongClickable(true);
 		setFocusable(true);
 		
-		paint.setColor(Color.WHITE);
 		try {
 			InputStream is = context.getAssets().open("mugi_chibi.jpg");
 			pic = BitmapFactory.decodeStream(is);
@@ -49,11 +52,16 @@ public class GameLoop extends View implements Runnable {
 	}
 	
 	private void update() {
-		if (TriggerEvents.ifBetweenValuesFLOAT(cx, 0, 100)) {
+		left = random.nextInt(getWidth());
+		top = random.nextInt(getHeight());
+		right = left + size ;
+		bottom = top + size;
+		
+		if (TriggerEvents.ifBetweenValuesFLOAT(cx, left, right)) {
 			
 		}
 		
-		if (TriggerEvents.ifBetweenValuesFLOAT(cy, 0, 100)) {
+		if (TriggerEvents.ifBetweenValuesFLOAT(cy, top, bottom)) {
 			
 		}
 	}
@@ -80,6 +88,8 @@ public class GameLoop extends View implements Runnable {
 	@Override
 	public void draw(Canvas canvas) {
 		super.draw(canvas);
+		
+		canvas.drawBitmap(pic, null, new Rect(left, top, right, bottom), null);
 	}
 	
 	@Override
