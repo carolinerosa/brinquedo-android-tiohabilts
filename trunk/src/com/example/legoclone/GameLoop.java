@@ -47,6 +47,8 @@ public class GameLoop extends View implements Runnable {
 			Log.e("IO Exception", "Couldn't load image");
 		}
 		
+		start();
+		
 		thread = new Thread(this);
 		thread.start();
 	}
@@ -60,7 +62,7 @@ public class GameLoop extends View implements Runnable {
 	
 	private void update() {
 		if (TriggerEvents.ifBetweenValuesFLOAT(cx, left, right) &&
-				TriggerEvents.ifBetweenValuesFLOAT(cy, top, bottom)) {
+			TriggerEvents.ifBetweenValuesFLOAT(cy, top, bottom)) {
 			left = random.nextInt(getWidth());
 			top = random.nextInt(getHeight());
 			right = left + size ;
@@ -98,7 +100,6 @@ public class GameLoop extends View implements Runnable {
 	
 	@Override
 	public void run () {
-		start();
 		while (true) {
 			try {
 				Thread.sleep(interval);
