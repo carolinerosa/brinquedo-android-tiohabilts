@@ -51,18 +51,20 @@ public class GameLoop extends View implements Runnable {
 		thread.start();
 	}
 	
-	private void update() {
+	private void start() {
 		left = random.nextInt(getWidth());
 		top = random.nextInt(getHeight());
 		right = left + size ;
 		bottom = top + size;
-		
-		if (TriggerEvents.ifBetweenValuesFLOAT(cx, left, right)) {
-			
-		}
-		
-		if (TriggerEvents.ifBetweenValuesFLOAT(cy, top, bottom)) {
-			
+	}
+	
+	private void update() {
+		if (TriggerEvents.ifBetweenValuesFLOAT(cx, left, right) &&
+				TriggerEvents.ifBetweenValuesFLOAT(cy, top, bottom)) {
+			left = random.nextInt(getWidth());
+			top = random.nextInt(getHeight());
+			right = left + size ;
+			bottom = top + size;
 		}
 	}
 	
@@ -80,6 +82,8 @@ public class GameLoop extends View implements Runnable {
 		}
 		if (event.getAction() == MotionEvent.ACTION_UP) {
 			Log.i("Touch event", "Remove touch event");
+			cx = getWidth() + 50;
+			cy = getHeight() + 50;
 		}
 		
 		return super.onTouchEvent(event);
@@ -94,6 +98,7 @@ public class GameLoop extends View implements Runnable {
 	
 	@Override
 	public void run () {
+		start();
 		while (true) {
 			try {
 				Thread.sleep(interval);

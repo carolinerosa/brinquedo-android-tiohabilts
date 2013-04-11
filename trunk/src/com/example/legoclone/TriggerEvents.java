@@ -5,8 +5,8 @@ public class TriggerEvents {
 													float MIN_VALUE,
 													float MAX_VALUE) {
 		if (MIN_VALUE > MAX_VALUE) {
-			throw new IllegalArgumentException(	"Minimum value can't be higher than" +
-												"Max value");
+			throw new IllegalArgumentException(	"Minimum value can't be higher than " +
+												"Max value" );
 		}
 		
 		if (variable >= MIN_VALUE && variable <= MAX_VALUE) {
