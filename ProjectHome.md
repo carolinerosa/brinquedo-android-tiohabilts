@@ -1,0 +1,1 @@
+Pequeno mini-micro-nano game em que o usuário deve ser rápido e acertar os animais fugitivos  antes que estes corram.
